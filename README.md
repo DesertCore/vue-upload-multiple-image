@@ -104,8 +104,8 @@ export default {
     VueUploadMultipleImage
   },
   methods: {
-    uploadImageSuccess(formData, index, fileList) {
-      console.log('data', formData, index, fileList)
+    uploadImageSuccess(formData, index, fileList, idUpload) {
+      console.log('data', formData, index, fileList, idUpload)
       // Upload image api
       // axios.post('http://your-url-upload', formData).then(response => {
       //   console.log(response)
