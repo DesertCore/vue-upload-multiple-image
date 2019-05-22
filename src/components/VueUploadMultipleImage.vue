@@ -225,7 +225,7 @@ export default {
           } else {
             this.images.push({name: file.name, path: dataURI, highlight: 0, default: 0})
           }
-          this.$emit('upload-success', formData, this.images.length - 1, this.images)
+          this.$emit('upload-success', formData, this.images.length - 1, this.images, this.idUpload)
         }
       }
       reader.readAsDataURL(file)

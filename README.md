@@ -21,8 +21,8 @@ yarn dev
 Install the package:
 
 ```
-npm install vue-upload-multiple-image
-yarn add vue-upload-multiple-image
+npm install DesertCore/vue-upload-multiple-image
+yarn add DesertCore/vue-upload-multiple-image
 ```
 
 Then import it in your project
@@ -262,7 +262,7 @@ a {
   <tbody>
     <tr>
       <td>upload-success</td>
-      <td>(formData, index, fileList)</td>
+      <td>(formData, index, fileList, idUpload)</td>
       <td>Upload image succcess</td>
     </tr>
     <tr>
