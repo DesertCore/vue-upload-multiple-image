@@ -216,6 +216,18 @@ a {
       <td>String</td>
       <td>Thả tệp của bạn ở đây ...</td>
       <td>Drag and drop</td>
+    </tr>    
+	<tr>
+      <td>noImageText</td>
+      <td>String</td>
+      <td>No Images</td>
+      <td>When is not edittable and there are no images</td>
+    </tr>
+	<tr>
+      <td>isEdditable</td>
+      <td>Boolean</td>
+      <td>true</td>
+      <td>Are the images edittable</td>
     </tr>
     <tr>
       <td>accept</td>
