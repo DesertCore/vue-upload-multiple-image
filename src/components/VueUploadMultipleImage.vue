@@ -310,23 +310,25 @@ export default {
       }
     },
     changeHighlight (currentIndex) {
-      this.currentIndexImage = currentIndex
-      if (this.images[this.currentIndexImage].default == 1) {
-        this.isShowingPrimary = true;
-      }else{
-        this.isShowingPrimary = false;
-      }
-      let arr = this.images
-      this.images = []
-      arr.map((item, index) => {
-        if (currentIndex === index) {
-          item.highlight = 1
-        } else {
-          item.highlight = 0
+      if(this.images.length > currentIndex){
+        this.currentIndexImage = currentIndex
+        if (this.images[this.currentIndexImage].default == 1) {
+          this.isShowingPrimary = true;
+        }else{
+          this.isShowingPrimary = false;
         }
-        return item
-      })
-      this.images = arr
+        let arr = this.images
+        this.images = []
+        arr.map((item, index) => {
+          if (currentIndex === index) {
+            item.highlight = 1
+          } else {
+            item.highlight = 0
+          }
+          return item
+        })
+        this.images = arr
+      }
     },
     markIsPrimary (currentIndex) {
       this.isShowingPrimary = true;
