@@ -40,9 +40,9 @@
             <img class="show-img img-responsive" :src="imagePreview">
           </div>
         </div>
-        <div class="image-bottom display-flex position-absolute full-width align-items-center justify-content-between" :class="!showPrimary && 'justify-content-end'" v-if="isEdittable">
-          <div class="image-bottom-left display-flex align-items-center" v-if="showPrimary">
-            <div class="display-flex align-items-center" v-show="imageDefault">
+        <div class="image-bottom display-flex position-absolute full-width align-items-center justify-content-between" :class="!showPrimary && 'justify-content-end'" >
+          <div class="image-bottom-left display-flex align-items-center" >
+            <div class="display-flex align-items-center" v-if="isShowingPrimary">
               <span class="image-primary display-flex align-items-center">
                 <svg class="image-icon-primary" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><circle fill="#10BC83" cx="256" cy="256" r="256"></circle><path fill="#FFF" d="M216.7 350.9h-.1c-5.1 0-9.9-2.1-13.4-5.7l-74.2-76c-7.4-7.5-7.2-19.5.4-26.8 7.5-7.4 19.5-7.2 26.8.4L217 305l139.7-138.5c7.5-7.4 19.5-7.4 26.8.1s7.4 19.5-.1 26.8l-153.2 152c-3.7 3.5-8.5 5.5-13.5 5.5z"></path></svg>
                 {{primaryText}}
@@ -56,9 +56,9 @@
                 </i>
               </popper>
             </div>
-            <a class="text-small mark-text-primary cursor-pointer" @click.prevent="markIsPrimary(currentIndexImage)" v-show="!imageDefault">{{markIsPrimaryText}}</a>
+            <a class="text-small mark-text-primary cursor-pointer" @click.prevent="markIsPrimary(currentIndexImage)" v-show="!isShowingPrimary && isEdittable">{{markIsPrimaryText}}</a>
           </div>
-          <div class="display-flex">
+          <div class="display-flex" v-if="isEdittable">
             <label class="image-edit display-flex cursor-pointer" :for="idEdit">
               <svg class="image-icon-edit" xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512"><path d="M469.56 42.433C420.927-6.199 382.331-.168 378.087.68l-4.8.96L36.895 338.001 0 512l173.985-36.894 336.431-336.399.941-4.86c.826-4.257 6.65-42.984-41.797-91.414zM41.944 470.057L64.3 364.617c12.448 3.347 31.968 11.255 50.51 29.794 18.96 18.963 27.84 39.986 31.875 53.436l-104.741 22.21zm132.504-41.134c-6.167-16.597-17.199-37.794-36.775-57.371C119 352.88 99.435 342.57 83.739 336.879l155.156-155.15 97.066-97.051c11.069 2.074 34.864 8.95 57.253 31.338 22.708 22.708 30.95 48.358 33.734 60.428l-96.685 96.663-155.815 155.816zm278.41-278.383c-6.167-16.6-17.196-37.8-36.781-57.384-18.669-18.667-38.228-28.977-53.92-34.668l26.118-26.113c8.785.484 30.373 4.87 58.423 32.918l.001.002c28.085 28.074 32.467 49.675 32.946 58.463l-26.787 26.782z"></path></svg>
             </label>
@@ -190,7 +190,8 @@ export default {
       images: [],
       isDragover: false,
       showLightbox: false,
-      arrLightBox: []
+      arrLightBox: [],
+      isShowingPrimary: true
     }
   },
   components: {
@@ -303,6 +304,11 @@ export default {
     },
     changeHighlight (currentIndex) {
       this.currentIndexImage = currentIndex
+      if (this.images[this.currentIndexImage].default == 1) {
+        this.isShowingPrimary = true;
+      }else{
+        this.isShowingPrimary = false;
+      }
       let arr = this.images
       this.images = []
       arr.map((item, index) => {
@@ -316,6 +322,7 @@ export default {
       this.images = arr
     },
     markIsPrimary (currentIndex) {
+      this.isShowingPrimary = true;
       this.images.map((item, index) => {
         if (currentIndex === index) {
           item.highlight = 1
