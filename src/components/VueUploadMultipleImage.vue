@@ -652,7 +652,7 @@ export default {
 }
 .image-list-container {
   max-width: 190px;
-  min-height: 50px;
+  min-height: 33px;
   margin-top: 10px;
 }
 .image-list-container .image-list-item {
