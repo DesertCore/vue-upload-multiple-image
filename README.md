@@ -237,7 +237,7 @@ a {
       <td>Accept</td>
     </tr>
     <tr>
-      <td>Value (v-model)</td>
+      <td>value (v-model)</td>
       <td>Array</td>
       <td>[]</td>
       <td>Array images</td>

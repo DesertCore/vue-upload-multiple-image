@@ -255,7 +255,8 @@ export default {
           } else {
             this.images.push({name: file.name, path: dataURI, highlight: 0, default: 0})
           }
-          this.$emit('upload-success', formData, this.images.length - 1, this.images, this.idUpload)
+          this.$emit('upload-success', formData, this.images.length - 1, this.images, this.idUpload);
+          this.$emit('input', this.images)
         }
       }
       reader.readAsDataURL(file)
@@ -274,7 +275,8 @@ export default {
         }
       }
       reader.readAsDataURL(file)
-      this.$emit('edit-image', formData, this.currentIndexImage, this.images, this.idUpload)
+      this.$emit('edit-image', formData, this.currentIndexImage, this.images, this.idUpload);
+      this.$emit('input', this.images);
     },
     uploadFieldChange (e) {
       let files = e.target.files || e.dataTransfer.files
@@ -347,6 +349,7 @@ export default {
           this.images[0].default = 1
         }
         this.images.splice(currentIndex, 1)
+        this.$emit('input', this.images)
         this.currentIndexImage = 0
         if (this.images.length) {
           this.images[0].highlight = 1
