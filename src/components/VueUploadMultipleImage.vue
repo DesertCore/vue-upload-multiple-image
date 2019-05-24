@@ -202,8 +202,12 @@ export default {
     imagePreview () {
       let index = findIndex(this.images, { highlight: 1 })
       if (index > -1) {
+        if(this.images[index].default == 1){ this.isShowingPrimary = true }
+        else{ this.isShowingPrimary = false }
         return this.images[index].path
       } else {
+        if(this.images[0].default == 1){ this.isShowingPrimary = true }
+        else{ this.isShowingPrimary = false }
         return this.images.length ? this.images[0].path : ''
       }
     },
@@ -372,10 +376,11 @@ export default {
   watch: {
     value: {
       handler: function (newVal) {
-        this.images = newVal
+    
         try {
           newVal.forEach((element, index) => {
             if(element.path == null && element.link){
+              element.path = '';
               let reader = new FileReader()
               reader.onload = (e) => {
                 if (e.target.result) { element.path = e.target.result; }
@@ -389,6 +394,7 @@ export default {
             }
             
           });
+          this.images = newVal
         } catch (error) {
           console.error(error)
         }
@@ -415,10 +421,11 @@ export default {
     this.images = []
     
     let newVal = cloneDeep(this.value)
-    this.images = newVal
+    
     try {
       newVal.forEach((element, index) => {
         if(element.path == null && element.link){
+          element.path = '';
           let reader = new FileReader()
           reader.onload = (e) => {
             if (e.target.result) { element.path = e.target.result; }
@@ -432,6 +439,7 @@ export default {
         }
         
       });
+      this.images = newVal
     } catch (error) {
       console.error(error)
     }
