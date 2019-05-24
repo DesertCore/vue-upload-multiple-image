@@ -84,7 +84,7 @@
           </div>
         </div>
       </div>
-      <div class="image-list-container display-flex flex-wrap" v-else>
+      <div class="image-list-container display-flex flex-wrap" v-else-if="multiple">
         <div class="image-list-item position-relative cursor-pointer" :class="image.highlight && 'image-highlight'" v-for="(image, index) in images" :key="index" @click="changeHighlight(index)">
           <div class="centered">
             <img class="show-img img-responsive" :src="image.path">
