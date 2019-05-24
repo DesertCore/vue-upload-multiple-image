@@ -250,10 +250,10 @@ export default {
         let dataURI = e.target.result
         if (dataURI) {
           if (!this.images.length) {
-            this.images.push({name: file.name, path: dataURI, highlight: 1, default: 1})
+            this.images.push({name: file.name, path: dataURI, highlight: 1, default: 1, changed: 1})
             this.currentIndexImage = 0
           } else {
-            this.images.push({name: file.name, path: dataURI, highlight: 0, default: 0})
+            this.images.push({name: file.name, path: dataURI, highlight: 0, default: 0, changed: 1})
           }
           this.$emit('upload-success', formData, this.images.length - 1, this.images, this.idUpload);
           this.$emit('input', this.images)
@@ -271,6 +271,7 @@ export default {
           if (this.images.length && this.images[this.currentIndexImage]) {
             this.images[this.currentIndexImage].path = dataURI
             this.images[this.currentIndexImage].name = file.name
+            this.images[this.currentIndexImage].changed = 1
           }
         }
       }
@@ -331,6 +332,7 @@ export default {
       this.isShowingPrimary = true;
       this.images.map((item, index) => {
         if (currentIndex === index) {
+          item.changed = 1
           item.highlight = 1
           item.default = 1
         } else {

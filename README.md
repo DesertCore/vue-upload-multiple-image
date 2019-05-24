@@ -73,6 +73,7 @@ How to use:
     default: 1,
     highlight: 1,
     caption: 'caption to display. receive', // Optional
+    changed: 1 // Optional (only if an image is added or editted)
   }
 ]
 ```
