@@ -153,7 +153,7 @@ export default {
       type: String,
       default: 'image/gif,image/jpeg,image/png,image/bmp,image/jpg'
     },
-    dataImages: {
+    value: {
       type: Array,
       default: () => {
         return []
@@ -363,9 +363,29 @@ export default {
     }
   },
   watch: {
-    dataImages: {
+    value: {
       handler: function (newVal) {
         this.images = newVal
+        try {
+          newVal.forEach((element, index) => {
+            if(element.path == null && element.link){
+              let reader = new FileReader()
+              reader.onload = (e) => {
+                if (e.target.result) { element.path = e.target.result; }
+                this.$set(this.images, index, element);
+              }
+              axios
+              .get(`/${element.link}`, {responseType: 'blob'})
+              .then(response =>{
+                    reader.readAsDataURL(response.data)   
+              })
+            }
+            
+          });
+        } catch (error) {
+          console.error(error)
+        }
+        
       },
       deep: true
     }
@@ -382,10 +402,32 @@ export default {
       event.preventDefault()
       this.isDragover = false
     })
+
   },
   created () {
     this.images = []
-    this.images = cloneDeep(this.dataImages)
+    
+    let newVal = cloneDeep(this.value)
+    this.images = newVal
+    try {
+      newVal.forEach((element, index) => {
+        if(element.path == null && element.link){
+          let reader = new FileReader()
+          reader.onload = (e) => {
+            if (e.target.result) { element.path = e.target.result; }
+            this.$set(this.images, index, element);
+          }
+          axios
+          .get(`/${element.link}`, {responseType: 'blob'})
+          .then(response =>{
+                reader.readAsDataURL(response.data)   
+          })
+        }
+        
+      });
+    } catch (error) {
+      console.error(error)
+    }
   }
 }
 </script>
