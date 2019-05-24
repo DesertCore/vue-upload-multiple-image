@@ -347,12 +347,14 @@ export default {
       this.$emit('before-remove', currentIndex, () => {
         if (this.images[currentIndex].default === 1) {
           this.images[0].default = 1
+          
         }
         this.images.splice(currentIndex, 1)
         this.$emit('input', this.images)
         this.currentIndexImage = 0
         if (this.images.length) {
           this.images[0].highlight = 1
+          this.isShowingPrimary = true
         }
       }, this.images)
     },
